@@ -18,11 +18,11 @@ class Product extends Model
         'stock'
     ];
 
-    public function orders() {
+    public function order() {
         return $this->belongsToMany(Order::class);
     }
 
-    public function carts() {
+    public function cart() {
         return $this->hasMany(Cart::class);
     }
 }

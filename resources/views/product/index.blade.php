@@ -41,6 +41,11 @@
           @csrf
           <input type="number" name="amount" value=1 />
           <button type="submit" class="btn btn-primary">Add To Cart</button>
+          @if($errors->any())
+            @foreach($errors->all() as $error)
+              <p>{{$error}}</p>
+            @endforeach
+          @endif
         </form>
       </div>
     @endforeach
