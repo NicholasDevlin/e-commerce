@@ -18,8 +18,8 @@ class Product extends Model
         'stock'
     ];
 
-    public function order() {
-        return $this->belongsToMany(Order::class);
+    public function productOrder() {
+        return $this->belongsTo(ProductOrder::class);
     }
 
     public function cart() {

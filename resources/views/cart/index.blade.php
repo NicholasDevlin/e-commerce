@@ -17,7 +17,7 @@
         <form method="post" action="{{route('delete_cart', $cart)}}">
           @method('delete')
           @csrf
-          <button type="submit" class="btn btn-primary">Delete</button>
+          <button type="submit" class="btn btn-danger">Delete</button>
         </form>
         @if($errors->any())
           @foreach($errors->all() as $error)
@@ -26,5 +26,9 @@
         @endif
       </div>
     @endforeach
+    <form method="post" action="{{route('checkout')}}">
+      @csrf
+      <button type="submit" class="btn btn-primary">Checkout</button>
+    </form>
 </div>
 @endsection

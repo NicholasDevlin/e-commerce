@@ -16,8 +16,6 @@ class CartController extends Controller
     }
 
     public function create(Product $product, Request $request){
-        
-
         $userId = Auth::id();
 
         $existingCart = Cart::where('product_id', $product->id)

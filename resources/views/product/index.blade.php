@@ -2,22 +2,6 @@
 
 @section('content')
 <div class="container">
-  <!-- <table>
-    <tr>
-      <th>Name</th>
-      <th>Price</th>
-      <th>Stock</th>
-      <th>Action</th>
-    </tr>
-    @foreach($products as $product)
-      <tr>
-        <td>{{$product->name}}</td>
-        <td>{{$product->price}}</td>
-        <td>{{$product->stock}}</td>
-        <td>{{$product->name}}</td>
-      </tr>
-    @endforeach
-  </table> -->
   @foreach($products as $product)
       <div class="card mb-3 p-3">
         <img src="{{ asset('storage/' . $product->image) }}" alt="{{$product->name}}" />

@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->string('payment_receipt');
-            $table->boolean('is_pay')->default(false);
+            $table->string('payment_receipt')->nullable();
+            $table->boolean('is_paid')->default(false);
             $table->timestamps();
         });
     }
