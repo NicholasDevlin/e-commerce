@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CartController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -10,6 +11,14 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/product/create', [App\Http\Controllers\ProductController::class, 'create_product'])->name('create_product');
-Route::get('/product', [App\Http\Controllers\ProductController::class, 'index'])->name('product');
-Route::post('/store_product', [App\Http\Controllers\ProductController::class, 'store'])->name('store_product');
+
+//product
+Route::get('/product', [ProductController::class, 'index'])->name('product');
+Route::get('/product/create', [ProductController::class, 'create'])->name('create_product');
+Route::post('/product/create', [ProductController::class, 'store'])->name('store_product');
+Route::get('/product/{product}', [ProductController::class, 'show'])->name('show_product');
+Route::get('/product/{product}/edit', [ProductController::class, 'edit'])->name('edit_product');
+Route::patch('/product/{product}/edit', [ProductController::class, 'update'])->name('update_product');
+Route::delete('/product/{product}', [ProductController::class, 'delete'])->name('delete_product');
+
+Route::post('/cart/{product}', [CartController::class, 'create'])->name('add_to_cart');

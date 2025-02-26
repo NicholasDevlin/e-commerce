@@ -9,12 +9,13 @@ use Illuminate\Support\Facades\Redirect;
 
 class ProductController extends Controller
 {
-    public function create_product(){
-        return view('product/create_product');
+    public function create(){
+        return view('product/');
     }
 
     public function index(){
-        return view('product/index');
+        $products = Product::all();
+        return view('product/index', compact('products'));
     }
 
     public function store(Request $request){
@@ -26,16 +27,51 @@ class ProductController extends Controller
 
         $file = $request->file('image');
         $path = time() . "_" . $request->name . '.' . $file->getClientOriginalExtension();
-        Storage::disk('local')->put('public/' . $path, file_get_contents($file));
+        $file->move(public_path('storage'), $path);
 
         Product::create([
             'name' => $request->name,
             'price' => $request->price,
             'stock' => $request->stock,
-            'description' => $request->desctiption,
+            'description' => $request->description,
             'image' => $path
         ]);
 
+        return Redirect::route('product');
+    }
+
+    public function show(Product $product) {
+        return view('product/show', compact('product'));
+    }
+
+    public function edit(Product $product) {
+        return view('product/edit', compact('product'));
+    }
+
+    public function update(Product $product, Request $request) {
+        $request->validate([
+            'name' => 'required',
+            'price' => 'required',
+            'stock' => 'required'
+        ]);
+
+        $file = $request->file('image');
+        $path = time() . "_" . $request->name . '.' . $file->getClientOriginalExtension();
+        $file->move(public_path('storage'), $path);
+
+        $product->update([
+            'name' => $request->name,
+            'price' => $request->price,
+            'stock' => $request->stock,
+            'description' => $request->description,
+            'image' => $path
+        ]);
+
+        return Redirect::route('product');
+    }
+
+    public function delete(Product $product){
+        $product->delete();
         return Redirect::route('product');
     }
 }
