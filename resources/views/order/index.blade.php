@@ -3,6 +3,12 @@
 @section('title', 'Order')
 @section('content')
 <div class="container">
+  <form method="GET" action="{{ route('order') }}">
+      <div class="input-group mb-3">
+          <input autocomplete="off" type="text" name="search" class="form-control" placeholder="Search by Buyer Name" value="{{ request('search') }}">
+          <button type="submit" class="btn btn-primary">Search</button>
+      </div>
+  </form>
    <table class="table">
     <tr>
       <th>Status</th>
@@ -34,5 +40,6 @@
       </tr>
     @endforeach
   </table>
+  <div>{{$orders->appends($_GET)->links('vendor.pagination.custom')}}</div>
 </div>
 @endsection

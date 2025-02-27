@@ -18,8 +18,17 @@ class OrderController extends Controller
         $this->middleware('auth');
     }
 
-    public function index(){
-        $orders = Order::all();
+    public function index(Request $request){
+        $query = Order::query();
+
+        if ($request->has('search')) {
+            $search = $request->input('search');
+            $query->whereHas('user', function($q) use ($search) {
+                $q->where('name', 'like', "%$search%");
+            });
+        }
+    
+        $orders = $query->paginate(1);
         return view('order/index', compact('orders'));
     }
 

@@ -1,10 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="container">
-<div class="row">
-  <a class="mb-3" href="{{route('create_product')}}"><button type="submit" class="btn btn-primary">Add New Product</button></a>
-</div>  
+  @if(Auth::user()->is_admin == true)
+  <div class="row">
+    <a class="mb-3" href="{{route('create_product')}}"><button type="submit" class="btn btn-primary">Add New Product</button></a>
+  </div>  
+  @endif
   @foreach($products as $product)
       <div class="card mb-3 p-3">
         <img src="{{ asset('storage/' . $product->image) }}" alt="{{$product->name}}" />
