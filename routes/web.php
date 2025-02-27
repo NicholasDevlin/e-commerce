@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -32,3 +33,6 @@ Route::get('/order/{order}', [OrderController::class, 'detail'])->name('order_de
 Route::post('/checkout', [OrderController::class, 'checkout'])->name('checkout');
 Route::post('/order/pay/{order}', [OrderController::class, 'submit_payment_receipt'])->name('submit_payment_receipt');
 Route::post('/order/confirm/{order}', [OrderController::class, 'confirm_payment'])->name('confirm_payment');
+//profile
+Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+Route::post('/profile', [ProfileController::class, 'update'])->name('update_profile');

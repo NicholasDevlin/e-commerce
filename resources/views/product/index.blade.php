@@ -2,25 +2,30 @@
 
 @section('content')
 <div class="container">
+<div class="row">
+  <a class="mb-3" href="{{route('create_product')}}"><button type="submit" class="btn btn-primary">Add New Product</button></a>
+</div>  
   @foreach($products as $product)
       <div class="card mb-3 p-3">
         <img src="{{ asset('storage/' . $product->image) }}" alt="{{$product->name}}" />
         <p>Name : {{$product->name}}</p>
         <p>Price :  {{$product->price}}</p>
         <p>Stock :  {{$product->stock}}</p>
-        <form method="get" action="{{route('show_product', $product)}}">
-          @csrf
-          <button type="submit" class="btn btn-primary mb-3">Show Detail</button>
-        </form>
-        <form method="get" action="{{route('edit_product', $product)}}">
-          @csrf
-          <button type="submit" class="btn btn-primary">Edit</button>
-        </form>
-        <form method="post" action="{{route('delete_product', $product)}}">
-          @method('delete')
-          @csrf
-          <button type="submit" class="btn btn-primary">Delete</button>
-        </form>
+        <div class="d-flex mb-3">
+          <form method="get" action="{{route('show_product', $product)}}">
+            @csrf
+            <button type="submit" class="btn btn-primary me-3">Show Detail</button>
+          </form>
+          <form method="get" action="{{route('edit_product', $product)}}">
+            @csrf
+            <button type="submit" class="btn btn-primary me-3">Edit</button>
+          </form>
+          <form method="post" action="{{route('delete_product', $product)}}">
+            @method('delete')
+            @csrf
+            <button type="submit" class="btn btn-primary me-3">Delete</button>
+          </form>
+        </div>
         <form method="post" action="{{route('add_to_cart', $product)}}">
           @csrf
           <input type="number" name="amount" value=1 />
